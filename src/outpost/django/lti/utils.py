@@ -35,17 +35,25 @@ class OutpostRequestValidator(RequestValidator):
             return False
         return True
 
-    def validate_timestamp_and_nonce(self, client_key, timestamp, nonce, request, request_token=None, access_token=None):
+    def validate_timestamp_and_nonce(
+        self,
+        client_key,
+        timestamp,
+        nonce,
+        request,
+        request_token=None,
+        access_token=None,
+    ):
         try:
             dt = datetime.utcfromtimestamp(int(timestamp)) - datetime.utcnow()
             if abs(dt.total_seconds()) > settings.LTI_NONCE_TIMEDELTA_MAX:
-                logger.warn(f'Possible replay attack detected: {client_key}')
+                logger.warn(f"Possible replay attack detected: {client_key}")
                 return False
         except ValueError:
-            logger.debug(f'Could not convert to int: {timestamp}')
+            logger.debug(f"Could not convert to int: {timestamp}")
             return False
         token = request_token or access_token
-        key = f'lti-replay-{client_key}-{timestamp}-{nonce}-{token}'
+        key = f"lti-replay-{client_key}-{timestamp}-{nonce}-{token}"
         if cache.get(key, None):
             return False
         cache.set(key, True, timeout=settings.LTI_NONCE_TIMEDELTA_MAX * 2)

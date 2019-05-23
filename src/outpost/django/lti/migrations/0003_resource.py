@@ -9,23 +9,43 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('contenttypes', '0002_remove_content_type_name'),
-        ('lti', '0002_auto_20190225_1708'),
+        ("contenttypes", "0002_remove_content_type_name"),
+        ("lti", "0002_auto_20190225_1708"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Resource',
+            name="Resource",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('resource', models.CharField(max_length=256)),
-                ('context', models.CharField(max_length=256)),
-                ('target', models.CharField(max_length=256)),
-                ('consumer', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='lti.Consumer')),
-                ('polymorphic_ctype', models.ForeignKey(editable=False, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='polymorphic_lti.resource_set+', to='contenttypes.ContentType')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("resource", models.CharField(max_length=256)),
+                ("context", models.CharField(max_length=256)),
+                ("target", models.CharField(max_length=256)),
+                (
+                    "consumer",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="lti.Consumer"
+                    ),
+                ),
+                (
+                    "polymorphic_ctype",
+                    models.ForeignKey(
+                        editable=False,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="polymorphic_lti.resource_set+",
+                        to="contenttypes.ContentType",
+                    ),
+                ),
             ],
-            options={
-                'manager_inheritance_from_future': True,
-            },
-        ),
+            options={"manager_inheritance_from_future": True},
+        )
     ]

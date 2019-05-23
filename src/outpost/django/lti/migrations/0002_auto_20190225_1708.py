@@ -8,14 +8,20 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('lti', '0001_initial'),
-    ]
+    dependencies = [("lti", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='consumer',
-            name='key',
-            field=models.CharField(max_length=30, primary_key=True, serialize=False, validators=[django.core.validators.MinLengthValidator(6), django.core.validators.MaxLengthValidator(30)]),
-        ),
+            model_name="consumer",
+            name="key",
+            field=models.CharField(
+                max_length=30,
+                primary_key=True,
+                serialize=False,
+                validators=[
+                    django.core.validators.MinLengthValidator(6),
+                    django.core.validators.MaxLengthValidator(30),
+                ],
+            ),
+        )
     ]

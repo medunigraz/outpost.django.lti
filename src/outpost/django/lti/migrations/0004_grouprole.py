@@ -9,16 +9,24 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('auth', '0008_alter_user_username_max_length'),
-        ('lti', '0003_resource'),
+        ("auth", "0008_alter_user_username_max_length"),
+        ("lti", "0003_resource"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GroupRole',
+            name="GroupRole",
             fields=[
-                ('role', models.CharField(max_length=256, primary_key=True, serialize=False)),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='auth.Group')),
+                (
+                    "role",
+                    models.CharField(max_length=256, primary_key=True, serialize=False),
+                ),
+                (
+                    "group",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="auth.Group"
+                    ),
+                ),
             ],
-        ),
+        )
     ]
