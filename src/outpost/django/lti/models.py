@@ -30,7 +30,7 @@ class Consumer(models.Model):
 
 
 class History(models.Model):
-    consumer = models.ForeignKey("Consumer")
+    consumer = models.ForeignKey("Consumer", on_delete=models.CASCADE)
     timestamp = models.DateTimeField()
     nonce = models.CharField(max_length=max(settings.LTI_NONCE_LENGTH))
     token = models.CharField(
@@ -43,7 +43,7 @@ class History(models.Model):
 
 class GroupRole(models.Model):
     role = models.CharField(primary_key=True, max_length=256)
-    group = models.ForeignKey(Group)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.role}: {self.group}"
